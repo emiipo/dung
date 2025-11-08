@@ -15,6 +15,7 @@ Application::Application() {
     if (mainRenderer == nullptr) {
         SDL_Log("SSDL_CreateRenderer Error: %s\n", SDL_GetError());
         SDL_DestroyWindow(mainWindow);
+        mainWindow = nullptr;
         SDL_Quit();
         return;
     }
@@ -22,7 +23,9 @@ Application::Application() {
 
 Application::~Application() {
     SDL_DestroyRenderer(mainRenderer);
+    mainRenderer = nullptr;
     SDL_DestroyWindow(mainWindow);
+    mainWindow = nullptr;
     SDL_Quit();
 }
 
