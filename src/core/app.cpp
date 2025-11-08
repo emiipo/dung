@@ -1,10 +1,6 @@
 #include "app.h"
 #include <iostream>
 
-//Setting screen dimensions
-kScreenWidth{ 640 };
-kScreenHeight{ 480 };
-
 Application::Application() {
     SDL_Init(SDL_INIT_VIDEO);
 
