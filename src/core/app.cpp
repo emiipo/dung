@@ -1,4 +1,4 @@
-#include <app.h>
+#include "app.h"
 #include <iostream>
 
 //Setting screen dimensions
@@ -12,15 +12,15 @@ Application::Application() {
     if (mainWindow == nullptr) {
         SDL_Log("SDL_CreateWindow Error: %s\n", SDL_GetError());
         SDL_Quit();
-        return 1;
+        return;
     }
 
-    mainRenderer = SDL_CreateRenderer(win, NULL);
+    mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
     if (mainRenderer == nullptr) {
         SDL_Log("SSDL_CreateRenderer Error: %s\n", SDL_GetError());
         SDL_DestroyWindow(mainWindow);
         SDL_Quit();
-        return 1;
+        return;
     }
 }
 
@@ -44,12 +44,12 @@ void Application::Run(){
             }
         }
 
-        SDL_SetRenderDrawColor(ren, 0, 0, 0, 255); // Set render draw color to black
-        SDL_RenderClear(ren); // Clear the renderer
+        SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, 255); // Set render draw color to black
+        SDL_RenderClear(mainRenderer); // Clear the renderer
 
-        SDL_SetRenderDrawColor(ren, 0, 255, 192, 203); // Set render draw color to green
-        SDL_RenderFillRect(ren, &greenSquare); // Render the rectangle
+        SDL_SetRenderDrawColor(mainRenderer, 0, 255, 192, 203); // Set render draw color to green
+        SDL_RenderFillRect(mainRenderer, &greenSquare); // Render the rectangle
         
-        SDL_RenderPresent(ren); // Render the screen
+        SDL_RenderPresent(mainRenderer); // Render the screen
     }
 }
