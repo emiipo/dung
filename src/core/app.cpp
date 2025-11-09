@@ -1,5 +1,6 @@
 #include "app.h"
 #include <iostream>
+#include <cstdlib>
 
 Application::Application() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -37,9 +38,6 @@ void Application::Run(){
     SDL_Event e;
     SDL_zero(e);
 
-    // Define a rectangle - still keeping for now but remove soon, just for debug
-    SDL_FRect square {270, 190, 100, 100};
-
     //Main loop
     while (!quit) {
         while (SDL_PollEvent(&e)) {
@@ -47,12 +45,23 @@ void Application::Run(){
                 quit = true;
             }
         }
+        const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;
 
-        SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, 255); // Set render draw color to black
+        SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE); // Set render draw color to black
         SDL_RenderClear(mainRenderer); // Clear the renderer
 
-        SDL_SetRenderDrawColor(mainRenderer, 255, 192, 203, 255); // Set render draw color to green
-        SDL_RenderFillRect(mainRenderer, &square); // Render the rectangle
+        SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
+        for(int x = 0; x < kScreenWidth/tilesize; x++){
+            for(int y = 0; y < kScreenHeight/tilesize; y++){
+                int val = rand() % 101;
+                if(val > 91){
+                    SDL_RenderDebugText(mainRenderer, tilesize*x, tilesize*y, "#");
+                }
+                else if (val > 50){
+                    SDL_RenderDebugText(mainRenderer, tilesize*x, tilesize*y, ".");
+                }
+            }
+        }
         
         SDL_RenderPresent(mainRenderer); // Render the screen
     }
