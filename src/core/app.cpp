@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 
-unsigned char  hash[] = {
+unsigned char hash[] = {
 	208,34,231,213,32,248,233,56,161,78,24,140,71,48,140,254,245,255,247,247,40,
 	185,248,251,245,28,124,204,204,76,36,1,107,28,234,163,202,224,245,128,167,204,
 	9,92,217,54,239,174,173,102,193,189,190,121,100,108,167,44,43,77,180,204,8,81,
@@ -17,6 +17,11 @@ unsigned char  hash[] = {
 	135,176,183,191,253,115,184,21,233,58,129,233,142,39,128,211,118,137,139,255,
 	114,20,218,113,154,27,127,246,250,1,8,198,250,209,92,222,173,21,88,102,219
 };
+
+unsigned int size = 1;
+
+std::vector<std::vector<float>> vec3 = {{1,1,0},{-1,1,0},{1,-1,0},{-1,-1,0},{1,0,1},{-1,0,1},{1,0,-1},{-1,0,-1},{0,1,1},{0,-1,1},{0,1,-1},{0,-1,-1}};
+std::vector<std::vector<float>> vec = {{-1,-1},{-1,0},{-1,1},{0,-1},{1,-1},{1,0},{0,1},{1,1}};
 
 Application::Application() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -51,8 +56,15 @@ void Application::Run(){
     int exitCode{ 0 };
 
     bool quit = false;
+    bool paused = false;
     SDL_Event e;
     SDL_zero(e);
+
+    SDL_SetRenderDrawBlendMode(mainRenderer, SDL_BLENDMODE_BLEND);
+
+    const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;
+    seed = 123456789;
+    //std::vector<std::vector<float>> map = GenerateDungeon(kScreenWidth, kScreenHeight, 3);
 
     //Main loop
     while (!quit) {
@@ -60,42 +72,90 @@ void Application::Run(){
             if (e.type == SDL_EVENT_QUIT) {
                 quit = true;
             }
+            else if(e.type == SDL_EVENT_KEY_DOWN){
+                if(e.key.key == SDLK_SPACE){
+                    paused = !paused;
+                }
+            }
+            else if(e.type == SDL_EVENT_MOUSE_WHEEL){
+                if(e.wheel.y > 0){
+                    size++;
+                }
+                else{
+                    size--;
+                }
+            }
         }
-        const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;
 
+        std::vector<std::vector<float>> map = GenerateDungeon(kScreenWidth/tilesize, kScreenHeight/tilesize, 4);
         SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE); // Set render draw color to black
         SDL_RenderClear(mainRenderer); // Clear the renderer
 
         SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
         for(int x = 0; x < kScreenWidth/tilesize; x++){
             for(int y = 0; y < kScreenHeight/tilesize; y++){
-                float val = GenerateNoise(x, y);
-                std::cout << val << std::endl;
-                if(val > 0){
-                    SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, 255);
-                    SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "#");
-                }
+                //if(map[y][x] > 0){
+                    int a = (int)((map[x][y] * 0.5f) * 255);
+                    SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
+                    //SDL_FRect rect{(float)x,(float)y,1,1};
+                    //SDL_RenderRect(mainRenderer, &rect);
+                    SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", (int)map[x][y]);
+                //}
                 //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", TestNoise(x, y));
             }
         }
+
+        if(!paused) seed++;
         
         SDL_RenderPresent(mainRenderer); // Render the screen
     }
 }
 
+std::vector<std::vector<float>> Application::GenerateDungeon(int width, int height, int octave){
+    std::vector<std::vector<float>> map;
+    std::vector<float> tmp;
+    for(int x = 0; x < width; x++){
+        tmp.clear();
+        for(int y = 0; y < height; y++){
+            float val = 0;
+            float freq = 1;
+            float amp = 1;
+
+            for(int i = 0; i < octave; i++){
+                val += GenerateNoise(x * freq / size, y * freq / size) / amp;
+                freq *= 2;
+                amp /= 2;
+            }
+
+            //Contrast
+            val *= 1.2;
+
+            //Clipping
+            if (val > 1.0f) val = 1.0f;
+            else if(val < -1.0f) val = -1.0f;
+
+            //make it 0 to 2
+            val += 1.0f;
+
+            tmp.push_back(val);
+        }
+        map.push_back(tmp);
+    }
+    return map;
+}
+
 std::vector<float> Application::GetGradient(int x, int y){
     //Redo this later for better gradient gen
-    int tmp = hash[(hash[y % 256] + x) % 256];
+    int tmp = hash[(hash[(x + seed) % 256] + (y + seed)) % 256] % 8;
 
-    //technically this is not gonna work proiperly but im just gonna sin and cos this, problem is it goes up to 256 which is not a full 360
-    return {(float)std::sin(tmp), (float)std::cos(tmp)};
+    return vec[tmp];
 }
 
 float Application::GenerateNoise(float x, float y){
-    int x0 = (int)x;
-    int y0 = (int)y;
-    int x1 = x0++;
-    int y1 = y1++;
+    int x0 = floor(x);
+    int y0 = floor(y);
+    int x1 = x0+1;
+    int y1 = y0+1;
 
     float wx = x - (float)x0;
     float wy = y - (float)y0;
@@ -122,5 +182,7 @@ float Application::DotGridGradient(int gx, int gy, float x, float y){
 }
 
 float Application::Interpolate(float a, float b, float w){
-    return a + w * (b - a);
+    //Basic interpolation for testing first
+    //return a + w * (b - a);
+    return (b - a) * (3.0 - w * 2.0) * w * w + a;
 }
