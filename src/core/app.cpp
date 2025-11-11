@@ -18,7 +18,7 @@ unsigned char hash[] = {
 	114,20,218,113,154,27,127,246,250,1,8,198,250,209,92,222,173,21,88,102,219
 };
 
-unsigned int size = 1;
+unsigned int size = 100;
 
 std::vector<std::vector<float>> vec3 = {{1,1,0},{-1,1,0},{1,-1,0},{-1,-1,0},{1,0,1},{-1,0,1},{1,0,-1},{-1,0,-1},{0,1,1},{0,-1,1},{0,1,-1},{0,-1,-1}};
 std::vector<std::vector<float>> vec = {{-1,-1},{-1,0},{-1,1},{0,-1},{1,-1},{1,0},{0,1},{1,1}};
@@ -87,7 +87,7 @@ void Application::Run(){
             }
         }
 
-        std::vector<std::vector<float>> map = GenerateDungeon(kScreenWidth/tilesize, kScreenHeight/tilesize, 4);
+        std::vector<std::vector<float>> map = GenerateDungeon(kScreenWidth/tilesize, kScreenHeight/tilesize, 6);
         SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE); // Set render draw color to black
         SDL_RenderClear(mainRenderer); // Clear the renderer
 
