@@ -56,7 +56,7 @@ void Application::Run(){
     int exitCode{ 0 };
 
     bool quit = false;
-    bool paused = false;
+    bool paused = true;
     SDL_Event e;
     SDL_zero(e);
 
@@ -87,13 +87,13 @@ void Application::Run(){
             }
         }
 
-        std::vector<std::vector<float>> map = GenerateDungeon(kScreenWidth/tilesize, kScreenHeight/tilesize, 6);
+        std::vector<std::vector<float>> map = GenerateDungeon(20, 20, 6);
         SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE); // Set render draw color to black
         SDL_RenderClear(mainRenderer); // Clear the renderer
 
         SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
-        for(int x = 0; x < kScreenWidth/tilesize; x++){
-            for(int y = 0; y < kScreenHeight/tilesize; y++){
+        for(int x = 0; x < 20; x++){
+            for(int y = 0; y < 20; y++){
                 //if(map[y][x] > 0){
                     int a = (int)((map[x][y] * 0.5f) * 255);
                     SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
