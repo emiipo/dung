@@ -1,5 +1,7 @@
 #include "app.h"
 #include "../level/level_generator.h"
+#include "../camera/camera.h"
+#include "../components/transform.h"
 #include <iostream>
 
 Application::Application() {
@@ -40,6 +42,15 @@ void Application::Run(){
     SDL_zero(e);
 
     SDL_SetRenderDrawBlendMode(mainRenderer, SDL_BLENDMODE_BLEND);
+
+    Camera cam(0,0,640,480);
+    cam.AddComponent<Transform>();
+    std::cout << "----------" << std::endl;
+    cam.AddComponent<Transform>();
+    std::cout << "----------" << std::endl;
+    cam.AddComponent<Transform>();
+    std::cout << "----------" << std::endl;
+    cam.AddComponent<Transform>();
 
     LevelGenerator gen;
     const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;

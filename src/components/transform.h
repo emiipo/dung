@@ -8,7 +8,6 @@ public:
 
     void SetPosition(float newX, float newY);
 
-private:
     float x;
     float y;
 };
