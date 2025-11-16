@@ -1,6 +1,6 @@
 #include "transform.h"
 
-Transform::Transform(float x = 0; float y = 0){
+Transform::Transform(float x, float y){
     this->x = x;
     this->y = y;
 }
