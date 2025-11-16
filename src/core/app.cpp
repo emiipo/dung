@@ -1,8 +1,6 @@
 #include "app.h"
 #include "../level/level_generator.h"
-#include <cstdlib>
 #include <iostream>
-#include <cmath>
 
 Application::Application() {
     SDL_Init(SDL_INIT_VIDEO);
