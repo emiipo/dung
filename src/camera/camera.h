@@ -3,10 +3,10 @@
 
 class Camera {
 public:
-    Camera();
+    Camera(float x, float y, int width, int height);
     ~Camera();
 
 private:
-    int mWidth{ 640 };
-    int mHeight{ 480 };
+    int mWidth;
+    int mHeight;
 };
