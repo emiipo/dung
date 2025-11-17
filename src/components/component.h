@@ -3,6 +3,8 @@
 class Component {
 public:
     Component();
-    ~Component();
+    virtual ~Component();
     int id{1};
+
+    void TestComp();
 };

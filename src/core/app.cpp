@@ -52,6 +52,9 @@ void Application::Run(){
     std::cout << "----------" << std::endl;
     cam.AddComponent<Transform>();
 
+    Transform* t = cam.GetComponent<Transform>();
+    t->TestComp();
+
     LevelGenerator gen;
     const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;
     std::vector<std::vector<float>> map = gen.GenerateLevel(20, 20);
