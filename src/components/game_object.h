@@ -25,7 +25,7 @@ public:
         const std::type_info& type = typeid(T);
 
         for(Component* comp : mComponents){
-            if(typeid(*comp) == type) return *static_cast<T>(*comp);
+            if(typeid(*comp) == type) return static_cast<T*>(comp);
         }
         return nullptr;
     }
