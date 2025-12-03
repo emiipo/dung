@@ -9,7 +9,7 @@ GameObject::~GameObject(){
 }
 
 void GameObject::TestObj(){
-    for(Component* comp : mComponents){
-        std::cout << comp->id << std::endl;
+    for(const std::unique_ptr<Component>& comp : mComponents){
+        comp->TestComp();
     }
 }
