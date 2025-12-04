@@ -1,6 +1,6 @@
 #include "app.h"
 #include "../level/level_generator.h"
-#include "../camera/camera.h"
+#include "../rendering/camera.h"
 #include "../components/transform.h"
 #include <iostream>
 
@@ -93,9 +93,9 @@ void Application::Run(){
                 //if(map[y][x] > 0){
                     int a = (int)((map[x][y] * 0.5f) * 255);
                     SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
-                    //SDL_FRect rect{(float)x,(float)y,1,1};
-                    //SDL_RenderRect(mainRenderer, &rect);
-                    SDL_RenderDebugTextFormat(mainRenderer, tilesize*x - t->position.x, tilesize*y - t->position.y, "%i", (int)map[x][y]);
+                    SDL_FRect rect{(float)x,(float)y,1,1};
+                    SDL_RenderRect(mainRenderer, &rect);
+                    //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x - t->position.x, tilesize*y - t->position.y, "%i", (int)map[x][y]);
                 //}
                 //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", TestNoise(x, y));
             }
