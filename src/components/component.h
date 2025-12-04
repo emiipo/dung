@@ -5,6 +5,4 @@ public:
     Component();
     virtual ~Component();
     int id{1};
-
-    void TestComp();
 };

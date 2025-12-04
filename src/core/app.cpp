@@ -44,13 +44,8 @@ void Application::Run(){
     SDL_SetRenderDrawBlendMode(mainRenderer, SDL_BLENDMODE_BLEND);
 
     Camera cam(0,0,640,480);
-    cam.AddComponent<Transform>();
-    cam.AddComponent<Transform>();
-    cam.AddComponent<Transform>();
-    cam.AddComponent<Transform>();
 
     Transform* t = cam.GetComponent<Transform>();
-    t->TestComp();
 
     LevelGenerator gen;
     const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;

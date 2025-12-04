@@ -1,5 +1,6 @@
 #pragma once
 #include "component.h"
+#include "../util/common.h"
 
 class Transform : public Component {
 public:
@@ -8,6 +9,5 @@ public:
 
     void SetPosition(float newX, float newY);
 
-    float x;
-    float y;
+    Vector2 position;
 };

@@ -1,8 +1,8 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "../components/game_object.h"
+#include "../components/world_object.h"
 
-class Camera : public GameObject{
+class Camera : public WorldObject{
 public:
     Camera(float x, float y, int width, int height);
     ~Camera();

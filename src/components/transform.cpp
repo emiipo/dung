@@ -1,8 +1,8 @@
 #include "transform.h"
 
 Transform::Transform(float x, float y){
-    this->x = x;
-    this->y = y;
+    position.x = x;
+    position.y = y;
 }
 
 Transform::~Transform(){
@@ -10,6 +10,6 @@ Transform::~Transform(){
 }
 
 void Transform::SetPosition(float newX, float newY){
-    x = newX;
-    y = newY;
+    position.x = newX;
+    position.y = newY;
 }

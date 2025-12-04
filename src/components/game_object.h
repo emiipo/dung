@@ -10,8 +10,6 @@ public:
     GameObject();
     ~GameObject();
 
-    void TestObj();
-
     template <class T>
     T* AddComponent(){
         std::unique_ptr<T> newComponent = std::make_unique<T>();
