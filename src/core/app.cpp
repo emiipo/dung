@@ -61,6 +61,18 @@ void Application::Run(){
                 if(e.key.key == SDLK_SPACE){
                     paused = !paused;
                 }
+                if(e.key.key == SDLK_UP){
+                    t->SetPosition(t->position.x, t->position.y - 1);
+                }
+                if(e.key.key == SDLK_DOWN){
+                    t->SetPosition(t->position.x, t->position.y + 1);
+                }
+                if(e.key.key == SDLK_RIGHT){
+                    t->SetPosition(t->position.x + 1, t->position.y);
+                }
+                if(e.key.key == SDLK_LEFT){
+                    t->SetPosition(t->position.x - 1, t->position.y);
+                }
             }
             else if(e.type == SDL_EVENT_MOUSE_WHEEL){
                 if(e.wheel.y > 0){
@@ -83,7 +95,7 @@ void Application::Run(){
                     SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
                     //SDL_FRect rect{(float)x,(float)y,1,1};
                     //SDL_RenderRect(mainRenderer, &rect);
-                    SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", (int)map[x][y]);
+                    SDL_RenderDebugTextFormat(mainRenderer, tilesize*x - t->position.x, tilesize*y - t->position.y, "%i", (int)map[x][y]);
                 //}
                 //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", TestNoise(x, y));
             }
