@@ -12,10 +12,10 @@ void RenderManager::Render(){
 
 }
 
-void RenderManager::RendererAdd(){
+void RenderManager::RendererAdd(WorldObject obj){
 
 }
 
-void RenderManager::RendererRemove(){
-    
+void RenderManager::RendererRemove(WorldObject obj){
+
 }
