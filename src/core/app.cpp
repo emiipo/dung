@@ -1,7 +1,7 @@
 #include "app.h"
 #include "../level/level_generator.h"
 #include "../rendering/camera.h"
-#include "../components/transform.h"
+#include "../components/world_object.h"
 #include <iostream>
 
 Application::Application() {
@@ -35,7 +35,9 @@ void Application::Run(){
     Camera cam(0,0,640,480);
     renderManager->SetMainCamera(&cam);
 
-    Transform* t = cam.GetComponent<Transform>();
+    WorldObject player;
+    renderManager->RendererAdd(&player);
+    Transform* t = player.transform;
 
     LevelGenerator gen;
     std::vector<std::vector<float>> map = gen.GenerateLevel(20, 20);

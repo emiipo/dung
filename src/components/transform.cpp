@@ -1,8 +1,7 @@
 #include "transform.h"
 
 Transform::Transform(float x, float y){
-    position.x = x;
-    position.y = y;
+    SetPosition(x, y);
 }
 
 void Transform::SetPosition(float newX, float newY){
