@@ -17,6 +17,8 @@ public:
     void SetMainCamera(Camera* camera);
 
 private:
+    void RenderEntity(WorldObject* entity);
+
     SDL_Renderer* mainRenderer{ nullptr };
     Camera* mainCamera{ nullptr };
 

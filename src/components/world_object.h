@@ -1,12 +1,12 @@
 #pragma once
 #include "game_object.h"
 #include "transform.h"
+#include "renderer.h"
 
 class WorldObject : public GameObject {
 public:
-    WorldObject();
+    WorldObject(bool initRenderer = true);
 
-    virtual void Render(float offsetX, float offsetY);
-
-    Transform* transform;
+    Transform* transform{ nullptr };
+    Renderer* renderer{ nullptr };
 };

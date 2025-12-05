@@ -1,10 +1,7 @@
 #include "world_object.h"
 #include "transform.h"
 
-WorldObject::WorldObject(){
+WorldObject::WorldObject(bool initRenderer){
     transform = AddComponent<Transform>();
-}
-
-void WorldObject::Render(float offsetX, float offsetY){
-    // Empty for now
+    if(initRenderer) renderer = AddComponent<Renderer>();
 }

@@ -38,7 +38,6 @@ void Application::Run(){
     Transform* t = cam.GetComponent<Transform>();
 
     LevelGenerator gen;
-    const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;
     std::vector<std::vector<float>> map = gen.GenerateLevel(20, 20);
 
     //Main loop
