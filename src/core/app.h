@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include <vector>
+#include "../rendering/render_manager.h"
 
 
 class Application {
@@ -15,5 +16,5 @@ private:
     int kScreenHeight{ 480 };
 
     SDL_Window* mainWindow{ nullptr };
-    SDL_Renderer* mainRenderer{ nullptr };
+    RenderManager* renderManager{ nullptr };
 };

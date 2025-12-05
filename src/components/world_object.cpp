@@ -2,9 +2,13 @@
 #include "transform.h"
 
 WorldObject::WorldObject(){
-    AddComponent<Transform>();
+    transform = AddComponent<Transform>();
 }
 
 WorldObject::~WorldObject(){
+
+}
+
+void WorldObject::Render(float offsetX, float offsetY){
 
 }

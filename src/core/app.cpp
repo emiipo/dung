@@ -14,19 +14,10 @@ Application::Application() {
         return;
     }
 
-    mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
-    if (mainRenderer == nullptr) {
-        SDL_Log("SSDL_CreateRenderer Error: %s\n", SDL_GetError());
-        SDL_DestroyWindow(mainWindow);
-        mainWindow = nullptr;
-        SDL_Quit();
-        return;
-    }
+    renderManager = new RenderManager(mainWindow);
 }
 
 Application::~Application() {
-    SDL_DestroyRenderer(mainRenderer);
-    mainRenderer = nullptr;
     SDL_DestroyWindow(mainWindow);
     mainWindow = nullptr;
     SDL_Quit();
@@ -41,9 +32,8 @@ void Application::Run(){
     SDL_Event e;
     SDL_zero(e);
 
-    SDL_SetRenderDrawBlendMode(mainRenderer, SDL_BLENDMODE_BLEND);
-
     Camera cam(0,0,640,480);
+    renderManager->SetMainCamera(&cam);
 
     Transform* t = cam.GetComponent<Transform>();
 
@@ -84,25 +74,21 @@ void Application::Run(){
             }
         }
 
-        SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE); // Set render draw color to black
-        SDL_RenderClear(mainRenderer); // Clear the renderer
-
-        SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
         for(int x = 0; x < 20; x++){
             for(int y = 0; y < 20; y++){
                 //if(map[y][x] > 0){
                     int a = (int)((map[x][y] * 0.5f) * 255);
-                    SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
+                    //SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
                     //SDL_FRect rect{(float)x,(float)y,1,1};
                     //SDL_RenderRect(mainRenderer, &rect);
-                    SDL_RenderDebugTextFormat(mainRenderer, tilesize*x - t->position.x, tilesize*y - t->position.y, "%i", (int)map[x][y]);
+                    //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x - t->position.x, tilesize*y - t->position.y, "%i", (int)map[x][y]);
                 //}
                 //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", TestNoise(x, y));
             }
         }
 
         //if(!paused) seed++;
-        
-        SDL_RenderPresent(mainRenderer); // Render the screen
+
+        renderManager->Render();
     }
 }
