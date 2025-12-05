@@ -5,7 +5,6 @@
 class Camera : public WorldObject{
 public:
     Camera(float x, float y, int width, int height);
-    ~Camera();
 
 private:
     int mWidth;

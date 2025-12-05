@@ -5,10 +5,6 @@ WorldObject::WorldObject(){
     transform = AddComponent<Transform>();
 }
 
-WorldObject::~WorldObject(){
-
-}
-
 void WorldObject::Render(float offsetX, float offsetY){
-
+    // Empty for now
 }

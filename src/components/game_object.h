@@ -7,9 +7,6 @@
 
 class GameObject {
 public:
-    GameObject();
-    ~GameObject();
-
     template <class T>
     T* AddComponent(){
         std::unique_ptr<T> newComponent = std::make_unique<T>();

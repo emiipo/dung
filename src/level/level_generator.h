@@ -4,9 +4,6 @@
 
 class LevelGenerator {
 public:
-    LevelGenerator();
-    ~LevelGenerator();
-
     std::vector<std::vector<float>> GenerateLevel(int width, int height);
 
 private:

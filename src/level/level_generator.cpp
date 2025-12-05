@@ -23,9 +23,6 @@ unsigned int size = 100;
 std::vector<std::vector<float>> vec3 = {{1,1,0},{-1,1,0},{1,-1,0},{-1,-1,0},{1,0,1},{-1,0,1},{1,0,-1},{-1,0,-1},{0,1,1},{0,-1,1},{0,1,-1},{0,-1,-1}};
 std::vector<std::vector<float>> vec = {{-1,-1},{-1,0},{-1,1},{0,-1},{1,-1},{1,0},{0,1},{1,1}};
 
-LevelGenerator::LevelGenerator(){}
-LevelGenerator::~LevelGenerator(){}
-
 std::vector<std::vector<float>> LevelGenerator::GenerateLevel(int width, int height){
     seed = 123456789;
 

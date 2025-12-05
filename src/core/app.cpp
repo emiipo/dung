@@ -74,7 +74,7 @@ void Application::Run(){
             }
         }
 
-        for(int x = 0; x < 20; x++){
+        /*for(int x = 0; x < 20; x++){
             for(int y = 0; y < 20; y++){
                 //if(map[y][x] > 0){
                     int a = (int)((map[x][y] * 0.5f) * 255);
@@ -85,7 +85,7 @@ void Application::Run(){
                 //}
                 //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", TestNoise(x, y));
             }
-        }
+        }*/
 
         //if(!paused) seed++;
 

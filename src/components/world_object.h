@@ -5,7 +5,6 @@
 class WorldObject : public GameObject {
 public:
     WorldObject();
-    ~WorldObject();
 
     virtual void Render(float offsetX, float offsetY);
 
