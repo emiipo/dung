@@ -15,6 +15,8 @@ Application::Application() {
         return;
     }
 
+    inputManager = new InputManager();
+    sdlEventManager = new SDLEventManager();
     renderManager = new RenderManager(mainWindow);
 }
 
@@ -29,9 +31,6 @@ void Application::Run(){
     int exitCode{ 0 };
 
     bool quit = false;
-    bool paused = true;
-    SDL_Event e;
-    SDL_zero(e);
 
     Camera cam(0,0,640,480);
     renderManager->SetMainCamera(&cam);
@@ -50,53 +49,24 @@ void Application::Run(){
         for(int y = 0; y < 400; y++){
             if(map[y][x] > 1){
                 WorldObject* tile = new WorldObject();
+                //Uint8 a = (Uint8)((map[x][y] * 0.5f) * 255);
                 tile->transform->SetPosition((float)(x * tilesize), (float)(y * tilesize));
+                //tile->renderer->SetRenderColor({255, 255, 255, a});
+                //tile->renderer->SetRenderCharacter((int)map[y][x]);
                 renderManager->RendererAdd(tile);
-                //int a = (int)((map[x][y] * 0.5f) * 255);
                 //SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
                 //SDL_FRect rect{(float)x,(float)y,1,1};
                 //SDL_RenderRect(mainRenderer, &rect);
                 //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x - t->position.x, tilesize*y - t->position.y, "%i", (int)map[x][y]);
             }
-            //SDL_RenderDebugTextFormat(mainRenderer, tilesize*x, tilesize*y, "%i", TestNoise(x, y));
         }
     }
 
     //Main loop
     while (!quit) {
-        while (SDL_PollEvent(&e)) {
-            if (e.type == SDL_EVENT_QUIT) {
-                quit = true;
-            }
-            else if(e.type == SDL_EVENT_KEY_DOWN){
-                if(e.key.key == SDLK_SPACE){
-                    paused = !paused;
-                }
-                if(e.key.key == SDLK_UP){
-                    t->SetPosition(t->position.x, t->position.y - tilesize);
-                }
-                if(e.key.key == SDLK_DOWN){
-                    t->SetPosition(t->position.x, t->position.y + tilesize);
-                }
-                if(e.key.key == SDLK_RIGHT){
-                    t->SetPosition(t->position.x + tilesize, t->position.y);
-                }
-                if(e.key.key == SDLK_LEFT){
-                    t->SetPosition(t->position.x - tilesize, t->position.y);
-                }
-            }
-            else if(e.type == SDL_EVENT_MOUSE_WHEEL){
-                if(e.wheel.y > 0){
-                    //size++;
-                }
-                else{
-                    //size--;
-                }
-            }
-        }
-
-        //if(!paused) seed++;
-
+        sdlEventManager->HandleSDLEvents();
+        //inputManager->HandleInput();
+        
         renderManager->Render();
     }
 }

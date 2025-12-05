@@ -2,6 +2,8 @@
 #include <SDL3/SDL.h>
 #include <vector>
 #include "../rendering/render_manager.h"
+#include "../input/input_manager.h"
+#include "SDL_event_manager.h"
 
 
 class Application {
@@ -17,4 +19,6 @@ private:
 
     SDL_Window* mainWindow{ nullptr };
     RenderManager* renderManager{ nullptr };
+    InputManager* inputManager{ nullptr };
+    SDLEventManager* sdlEventManager{ nullptr };
 };
