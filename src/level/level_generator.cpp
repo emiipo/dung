@@ -23,10 +23,27 @@ unsigned int size = 100;
 std::vector<std::vector<float>> vec3 = {{1,1,0},{-1,1,0},{1,-1,0},{-1,-1,0},{1,0,1},{-1,0,1},{1,0,-1},{-1,0,-1},{0,1,1},{0,-1,1},{0,1,-1},{0,-1,-1}};
 std::vector<std::vector<float>> vec = {{-1,-1},{-1,0},{-1,1},{0,-1},{1,-1},{1,0},{0,1},{1,1}};
 
+//level size has to be even numbers for now
 std::vector<std::vector<float>> LevelGenerator::GenerateLevel(int width, int height){
     seed = 123456789;
 
-    return GenerateDungeon(width, height, 6);
+    std::vector<std::vector<float>> first = GenerateDungeon(width/2, height/2, 5);
+    std::vector<std::vector<float>> second;
+    std::vector<float> tmp;
+
+    //Upscaling for more blockyness
+    for(int x = 0; x < width/2; x++){
+        tmp.clear();
+        for(int y = 0; y < height/2; y++){
+            float val = first[x][y];
+            tmp.push_back(val);
+            tmp.push_back(val);
+        }
+        second.push_back(tmp);
+        second.push_back(tmp);
+    }
+
+    return second;
 }
 
 std::vector<std::vector<float>> LevelGenerator::GenerateDungeon(int width, int height, int octave){

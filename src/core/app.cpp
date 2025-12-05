@@ -48,7 +48,7 @@ void Application::Run(){
 
     for(int x = 0; x < 400; x++){
         for(int y = 0; y < 400; y++){
-            if(map[y][x] > 0){
+            if(map[y][x] > 1){
                 WorldObject* tile = new WorldObject();
                 tile->transform->SetPosition((float)(x * tilesize), (float)(y * tilesize));
                 renderManager->RendererAdd(tile);
