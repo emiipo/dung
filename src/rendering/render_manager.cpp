@@ -1,6 +1,5 @@
 #include "render_manager.h"
-
-const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;
+#include "../util/common.h"
 
 RenderManager::RenderManager(SDL_Window* mainWindow){
     mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
@@ -40,6 +39,7 @@ void RenderManager::Render(){
 void RenderManager::RenderEntity(WorldObject* entity){
     // For now only rendering ascii, later implement different rendering based on renderer type
     if(entity->transform == nullptr || entity->renderer == nullptr) return;
+    SDL_SetRenderDrawColor(mainRenderer, entity->renderer->GetRenderColor().r, entity->renderer->GetRenderColor().g, entity->renderer->GetRenderColor().b, entity->renderer->GetRenderColor().a);
     SDL_RenderDebugTextFormat(mainRenderer, entity->transform->position.x - mainCamera->transform->position.x, entity->transform->position.y - mainCamera->transform->position.y, "%c", entity->renderer->GetRenderCharacter());
 }
 

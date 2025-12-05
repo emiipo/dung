@@ -1,7 +1,5 @@
 #include "camera.h"
-
-// put this in util or smth
-const int tilesize = SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE;
+#include "../util/common.h"
 
 Camera::Camera(float x, float y, int width, int height) : WorldObject(false){
     mWidth = width;
