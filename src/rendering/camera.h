@@ -6,7 +6,14 @@ class Camera : public WorldObject{
 public:
     Camera(float x, float y, int width, int height);
 
+    void SetFollowTarget(WorldObject* target);
+    void ClearFollowTarget();
+
+    void Update();
+
 private:
     int mWidth;
     int mHeight;
+
+    WorldObject* followTarget{ nullptr };
 };

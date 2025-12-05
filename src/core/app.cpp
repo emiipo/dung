@@ -35,8 +35,12 @@ void Application::Run(){
     Camera cam(0,0,640,480);
     renderManager->SetMainCamera(&cam);
 
+    WorldObject thing;
+    renderManager->RendererAdd(&thing);
+
     WorldObject player;
     renderManager->RendererAdd(&player);
+    cam.SetFollowTarget(&player);
     Transform* t = player.transform;
 
     LevelGenerator gen;

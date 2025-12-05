@@ -31,6 +31,9 @@ void RenderManager::Render(){
         }
     }
 
+    // For now doing every frame but look into a better way later
+    mainCamera->Update();
+
     SDL_RenderPresent(mainRenderer); // Render the screen
 }
 
