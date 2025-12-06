@@ -11,8 +11,8 @@ As of now there is not much of the game as I started really enjoying implementin
 
 Here's a little reminder for myself of things I plan to do :)
 
-[ ] Properly implement Events using delegates and such
-[ ] Organise the code base better (probably seperate into game & engine folders)
-[ ] Fix code style (I am really undecisive and usually vibe it out)
-[ ] Proper input handling with easily rebindable keys
-[ ] Increase this list :)
+- [ ] Properly implement Events using delegates and such
+- [ ] Organise the code base better (probably seperate into game & engine folders)
+- [ ] Fix code style (I am really undecisive and usually vibe it out)
+- [ ] Proper input handling with easily rebindable keys
+- [ ] Increase this list :)
