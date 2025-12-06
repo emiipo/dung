@@ -19,3 +19,7 @@ void Camera::Update(){
         transform->SetPosition(followTarget->transform->position.x - (mWidth/2) + (tilesize/2), followTarget->transform->position.y - (mHeight/2) + (tilesize/2));
     }
 }
+
+Vector2 Camera::GetDimensions(){
+    return {(float)mWidth, (float)mHeight};
+}

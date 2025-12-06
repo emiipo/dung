@@ -25,7 +25,7 @@ Application::Application() {
     inputManager->AddKeyDownListener(SDLK_RIGHT, [this]() {this->MoveRight();});
     
 
-    renderManager = new RenderManager(mainWindow);
+    renderManager = new RenderManager(mainWindow, true);
 }
 
 Application::~Application() {

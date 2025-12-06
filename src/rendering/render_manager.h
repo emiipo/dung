@@ -2,6 +2,7 @@
 #include <SDL3/SDL.h>
 #include <list>
 #include "../components/world_object.h"
+#include "../components/transform.h"
 #include "camera.h"
 
 class RenderManager {

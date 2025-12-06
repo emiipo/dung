@@ -2,7 +2,8 @@
 #include "../util/common.h"
 
 RenderManager::RenderManager(SDL_Window* mainWindow, bool renderDebug){
-    mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
+    //mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
+    mainRenderer = SDL_CreateGPURenderer(NULL, mainWindow);
     if (mainRenderer == nullptr) {
         SDL_Log("SSDL_CreateRenderer Error: %s\n", SDL_GetError());
         SDL_DestroyWindow(mainWindow);
@@ -28,8 +29,12 @@ void RenderManager::Render(){
     SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
     if(mainCamera != nullptr){
         for(WorldObject* entity : mEntitiesToRender){
-            RenderEntity(entity);
-            if(renderDebug) RenderDebug(entity);
+            // Works for now but there is a little gap on bottom left and right if they're position isn't in so need to account for their size, but im thinking there
+            // has to be a better way by AABB checking or smth
+            if(entity->transform->position.x >= mainCamera->transform->position.x && entity->transform->position.x <= mainCamera->transform->position.x + mainCamera->GetDimensions().x && entity->transform->position.y >= mainCamera->transform->position.y && entity->transform->position.y <= mainCamera->transform->position.y + mainCamera->GetDimensions().y){
+                RenderEntity(entity);
+                if(renderDebug) RenderDebug(entity);
+            }
         }
     }
 
@@ -48,9 +53,14 @@ void RenderManager::RenderEntity(WorldObject* entity){
 
 void RenderManager::RenderDebug(WorldObject* entity){
     Collider* col = entity->collider;
+    SDL_FRect debugRect;
     if(col != nullptr){
+        debugRect.x = col->bounds.x - mainCamera->transform->position.x + entity->transform->position.x;
+        debugRect.y = col->bounds.y - mainCamera->transform->position.y + entity->transform->position.y;
+        debugRect.w = col->bounds.w;
+        debugRect.h = col->bounds.h;
         SDL_SetRenderDrawColor(mainRenderer, 0, 255, 0, 255);
-        SDL_RenderRect(mainRenderer, &col->bounds);
+        SDL_RenderRect(mainRenderer, &debugRect);
     }
 }
 
