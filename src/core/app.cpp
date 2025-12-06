@@ -19,6 +19,11 @@ Application::Application() {
     sdlEventManager = new SDLEventManager();
     sdlEventManager->SetInputManager(inputManager);
     sdlEventManager->onQuitEvent.AddListener([this]() {this->Quit();});
+    inputManager->AddKeyDownListener(SDLK_UP, [this]() {this->MoveUp();});
+    inputManager->AddKeyDownListener(SDLK_DOWN, [this]() {this->MoveDown();});
+    inputManager->AddKeyDownListener(SDLK_LEFT, [this]() {this->MoveLeft();});
+    inputManager->AddKeyDownListener(SDLK_RIGHT, [this]() {this->MoveRight();});
+    
 
     renderManager = new RenderManager(mainWindow);
 }
@@ -41,7 +46,7 @@ void Application::Run(){
     player.renderer->SetRenderColor({255, 182, 193, 255});
     renderManager->RendererAdd(&player);
     cam.SetFollowTarget(&player);
-    Transform* t = player.transform;
+    t = player.transform;
 
     LevelGenerator gen;
     std::vector<std::vector<float>> map = gen.GenerateLevel(400, 400);
@@ -74,4 +79,20 @@ void Application::Run(){
 
 void Application::Quit(){
     quit = true;
+}
+
+void Application::MoveUp(){
+    if(t) t->SetPosition(t->position.x, t->position.y - tilesize);
+}
+
+void Application::MoveDown(){
+    if(t) t->SetPosition(t->position.x, t->position.y + tilesize);
+}
+
+void Application::MoveLeft(){
+    if(t) t->SetPosition(t->position.x - tilesize, t->position.y);
+}
+
+void Application::MoveRight(){
+    if(t) t->SetPosition(t->position.x + tilesize, t->position.y);
 }

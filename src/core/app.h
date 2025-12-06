@@ -4,6 +4,7 @@
 #include "../rendering/render_manager.h"
 #include "../input/input_manager.h"
 #include "SDL_event_manager.h"
+#include "../components/transform.h"
 
 
 class Application {
@@ -13,6 +14,12 @@ public:
 
     void Run();
     void Quit();
+
+    //These should be moved into components etc, here for testing only
+    void MoveUp();
+    void MoveDown();
+    void MoveLeft();
+    void MoveRight();
 
 private:
     bool quit{ false };
@@ -24,4 +31,7 @@ private:
     RenderManager* renderManager{ nullptr };
     InputManager* inputManager{ nullptr };
     SDLEventManager* sdlEventManager{ nullptr };
+
+    //Delete later, testing
+    Transform* t{nullptr};
 };
