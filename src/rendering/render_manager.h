@@ -6,7 +6,7 @@
 
 class RenderManager {
 public:
-    RenderManager(SDL_Window* mainWindow);
+    RenderManager(SDL_Window* mainWindow, bool renderDebug = false);
     ~RenderManager();
 
     void Render();
@@ -18,9 +18,12 @@ public:
 
 private:
     void RenderEntity(WorldObject* entity);
+    void RenderDebug(WorldObject* entity);
 
     SDL_Renderer* mainRenderer{ nullptr };
     Camera* mainCamera{ nullptr };
+
+    bool renderDebug{ false };
 
     std::list<WorldObject*> mEntitiesToRender;
 };

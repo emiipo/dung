@@ -1,7 +1,7 @@
 #include "render_manager.h"
 #include "../util/common.h"
 
-RenderManager::RenderManager(SDL_Window* mainWindow){
+RenderManager::RenderManager(SDL_Window* mainWindow, bool renderDebug){
     mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
     if (mainRenderer == nullptr) {
         SDL_Log("SSDL_CreateRenderer Error: %s\n", SDL_GetError());
@@ -12,6 +12,8 @@ RenderManager::RenderManager(SDL_Window* mainWindow){
     }
 
     SDL_SetRenderDrawBlendMode(mainRenderer, SDL_BLENDMODE_BLEND);
+
+    this->renderDebug = renderDebug;
 }
 
 RenderManager::~RenderManager(){
@@ -27,6 +29,7 @@ void RenderManager::Render(){
     if(mainCamera != nullptr){
         for(WorldObject* entity : mEntitiesToRender){
             RenderEntity(entity);
+            if(renderDebug) RenderDebug(entity);
         }
     }
 
@@ -41,6 +44,14 @@ void RenderManager::RenderEntity(WorldObject* entity){
     if(entity->transform == nullptr || entity->renderer == nullptr) return;
     SDL_SetRenderDrawColor(mainRenderer, entity->renderer->GetRenderColor().r, entity->renderer->GetRenderColor().g, entity->renderer->GetRenderColor().b, entity->renderer->GetRenderColor().a);
     SDL_RenderDebugTextFormat(mainRenderer, entity->transform->position.x - mainCamera->transform->position.x, entity->transform->position.y - mainCamera->transform->position.y, "%c", entity->renderer->GetRenderCharacter());
+}
+
+void RenderManager::RenderDebug(WorldObject* entity){
+    Collider* col = entity->collider;
+    if(col != nullptr){
+        SDL_SetRenderDrawColor(mainRenderer, 0, 255, 0, 255);
+        SDL_RenderRect(mainRenderer, &col->bounds);
+    }
 }
 
 void RenderManager::SetMainCamera(Camera* camera){

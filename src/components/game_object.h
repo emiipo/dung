@@ -10,6 +10,7 @@ public:
     template <class T>
     T* AddComponent(){
         std::unique_ptr<T> newComponent = std::make_unique<T>();
+        newComponent->mCreator = this;
         T* ptr = newComponent.get();
         mComponents.push_back(std::move(newComponent));
         return ptr;
