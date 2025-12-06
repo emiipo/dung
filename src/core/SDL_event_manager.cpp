@@ -11,9 +11,9 @@ void SDLEventManager::SetInputManager(InputManager* im) {
 void SDLEventManager::HandleSDLEvents() {
     while (SDL_PollEvent(&sdlEvent)) {
         if (sdlEvent.type == SDL_EVENT_QUIT) {
-            //Setup quit event
+            onQuitEvent.Invoke();
         }
-        else if(sdlEvent.type == SDL_EVENT_KEY_DOWN || sdlEvent.type == SDL_EVENT_KEY_UP){
+        else if((sdlEvent.type == SDL_EVENT_KEY_DOWN || sdlEvent.type == SDL_EVENT_KEY_UP) && inputManager != nullptr) {
             inputManager->HandleInputEvent(sdlEvent);
         }
     }

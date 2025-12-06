@@ -12,8 +12,11 @@ public:
     ~Application();
 
     void Run();
+    void Quit();
 
 private:
+    bool quit{ false };
+
     int kScreenWidth{ 640 };
     int kScreenHeight{ 480 };
 

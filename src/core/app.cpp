@@ -17,6 +17,9 @@ Application::Application() {
 
     inputManager = new InputManager();
     sdlEventManager = new SDLEventManager();
+    sdlEventManager->SetInputManager(inputManager);
+    sdlEventManager->onQuitEvent.AddListener([this]() {this->Quit();});
+
     renderManager = new RenderManager(mainWindow);
 }
 
@@ -29,8 +32,6 @@ Application::~Application() {
 void Application::Run(){
     //Final exit code
     int exitCode{ 0 };
-
-    bool quit = false;
 
     Camera cam(0,0,640,480);
     renderManager->SetMainCamera(&cam);
@@ -69,4 +70,8 @@ void Application::Run(){
         
         renderManager->Render();
     }
+}
+
+void Application::Quit(){
+    quit = true;
 }
