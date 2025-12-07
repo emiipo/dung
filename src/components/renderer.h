@@ -14,7 +14,12 @@ public:
     void SetRenderColor(SDL_Color color);
     const SDL_Color GetRenderColor();
 
+    Vector2 GetDimensions();
+
 private:
+    float mWidth;
+    float mHeight;
+
     char renderChar;
     SDL_Color renderColor;
 };

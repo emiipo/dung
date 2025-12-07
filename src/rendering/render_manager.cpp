@@ -2,8 +2,8 @@
 #include "../util/common.h"
 
 RenderManager::RenderManager(SDL_Window* mainWindow, bool renderDebug){
-    //mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
-    mainRenderer = SDL_CreateGPURenderer(NULL, mainWindow);
+    mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
+    //mainRenderer = SDL_CreateGPURenderer(NULL, mainWindow);
     if (mainRenderer == nullptr) {
         SDL_Log("SSDL_CreateRenderer Error: %s\n", SDL_GetError());
         SDL_DestroyWindow(mainWindow);
@@ -62,6 +62,12 @@ void RenderManager::RenderDebug(WorldObject* entity){
         SDL_SetRenderDrawColor(mainRenderer, 0, 255, 0, 255);
         SDL_RenderRect(mainRenderer, &debugRect);
     }
+}
+
+// This will be same code as collision checking, yet keeping seperate for now as I would have to put it in common or include collisions
+// into this(which might be the go). For now just using the camera for first arg
+bool RenderManager::CheckOverlap(Renderer* renderer){
+    return (mainCamera->transform->position.x + mainCamera->GetDimensions().x >= entity->transform->position.x && entity->transform->position.x + entity) && ();
 }
 
 void RenderManager::SetMainCamera(Camera* camera){

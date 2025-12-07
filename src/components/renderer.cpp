@@ -3,6 +3,8 @@
 Renderer::Renderer(char defaultChar, SDL_Color defaultColor){
     renderChar = defaultChar;
     renderColor = defaultColor;
+    mWidth = tilesize;
+    mHeight = tilesize;
 }
 
 void Renderer::SetRenderCharacter(char c){
@@ -19,4 +21,8 @@ void Renderer::SetRenderColor(SDL_Color color){
 
 const SDL_Color Renderer::GetRenderColor(){
     return renderColor;
+}
+
+Vector2 Renderer::GetDimensions(){
+    return {mWidth, mHeight};
 }
