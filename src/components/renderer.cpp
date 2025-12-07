@@ -1,28 +1,45 @@
 #include "renderer.h"
+#include "game_object.h"
+#include "transform.h"
 
 Renderer::Renderer(char defaultChar, SDL_Color defaultColor){
-    renderChar = defaultChar;
-    renderColor = defaultColor;
-    mWidth = tilesize;
-    mHeight = tilesize;
+    mRenderChar = defaultChar;
+    mRenderColor = defaultColor;
+    mSize.x = tilesize;
+    mSize.y = tilesize;
+}
+
+//Disable if transform doesnt exist
+void Renderer::Init() {
+    mTransform = gameObject->GetComponent<Transform>();
 }
 
 void Renderer::SetRenderCharacter(char c){
-    renderChar = c;
+    mRenderChar = c;
 }
 
 const char Renderer::GetRenderCharacter(){
-    return renderChar;
+    return mRenderChar;
 }
 
 void Renderer::SetRenderColor(SDL_Color color){
-    renderColor = color;
+    mRenderColor = color;
 }
 
 const SDL_Color Renderer::GetRenderColor(){
-    return renderColor;
+    return mRenderColor;
 }
 
-Vector2 Renderer::GetDimensions(){
-    return {mWidth, mHeight};
+Vector4 Renderer::GetBounds(){
+    if(!mTransform) return {0,0,0,0};
+    return {mTransform->position.x, mTransform->position.y, mSize.x, mSize.y};
+}
+
+Vector2 Renderer::GetPosition(){
+    if(!mTransform) return {0,0};
+    return {mTransform->position.x, mTransform->position.y};
+}
+
+Vector2 Renderer::GetSize(){
+    return {mSize.x, mSize.y};
 }

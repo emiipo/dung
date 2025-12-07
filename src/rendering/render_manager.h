@@ -6,6 +6,8 @@
 #include "../util/common.h"
 #include "camera.h"
 
+class Renderer;
+
 class RenderManager {
 public:
     RenderManager(SDL_Window* mainWindow, bool renderDebug = false);
@@ -22,7 +24,7 @@ private:
     void RenderEntity(WorldObject* entity);
     void RenderDebug(WorldObject* entity);
 
-    bool CheckOverlap(WorldObject* entity);
+    bool CheckOverlap(Renderer* renderer);
 
     SDL_Renderer* mainRenderer{ nullptr };
     Camera* mainCamera{ nullptr };

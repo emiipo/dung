@@ -3,10 +3,14 @@
 #include "component.h"
 #include "../util/common.h"
 
+class Transform;
+
 // For now this will be default renderer, eventually extend into ascii/texture etc
 class Renderer : public Component {
 public:
     Renderer(char defaultChar = '#', SDL_Color defaultColor = {255, 255, 255, 255});
+
+    void Init() override;
 
     void SetRenderCharacter(char c);
     const char GetRenderCharacter();
@@ -14,12 +18,15 @@ public:
     void SetRenderColor(SDL_Color color);
     const SDL_Color GetRenderColor();
 
-    Vector2 GetDimensions();
+    Vector4 GetBounds();
+    Vector2 GetPosition();
+    Vector2 GetSize();
 
 private:
-    float mWidth;
-    float mHeight;
+    Transform* mTransform{ nullptr };
 
-    char renderChar;
-    SDL_Color renderColor;
+    Vector2 mSize;
+
+    char mRenderChar;
+    SDL_Color mRenderColor;
 };

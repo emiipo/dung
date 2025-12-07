@@ -1,5 +1,6 @@
 #include "render_manager.h"
 #include "../util/common.h"
+#include "../components/renderer.h"
 
 RenderManager::RenderManager(SDL_Window* mainWindow, bool renderDebug){
     mainRenderer = SDL_CreateRenderer(mainWindow, NULL);
@@ -29,9 +30,7 @@ void RenderManager::Render(){
     SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
     if(mainCamera != nullptr){
         for(WorldObject* entity : mEntitiesToRender){
-            // Works for now but there is a little gap on bottom left and right if they're position isn't in so need to account for their size, but im thinking there
-            // has to be a better way by AABB checking or smth
-            if(entity->transform->position.x >= mainCamera->transform->position.x && entity->transform->position.x <= mainCamera->transform->position.x + mainCamera->GetDimensions().x && entity->transform->position.y >= mainCamera->transform->position.y && entity->transform->position.y <= mainCamera->transform->position.y + mainCamera->GetDimensions().y){
+            if(CheckOverlap(entity->renderer)){
                 RenderEntity(entity);
                 if(renderDebug) RenderDebug(entity);
             }
@@ -55,10 +54,8 @@ void RenderManager::RenderDebug(WorldObject* entity){
     Collider* col = entity->collider;
     SDL_FRect debugRect;
     if(col != nullptr){
-        debugRect.x = col->bounds.x - mainCamera->transform->position.x + entity->transform->position.x;
-        debugRect.y = col->bounds.y - mainCamera->transform->position.y + entity->transform->position.y;
-        debugRect.w = col->bounds.w;
-        debugRect.h = col->bounds.h;
+        Vector4 bounds = col->GetBounds();
+        debugRect = {bounds.x - mainCamera->transform->position.x, bounds.y - mainCamera->transform->position.y, debugRect.w = bounds.z, debugRect.h = bounds.w};
         SDL_SetRenderDrawColor(mainRenderer, 0, 255, 0, 255);
         SDL_RenderRect(mainRenderer, &debugRect);
     }
@@ -67,13 +64,17 @@ void RenderManager::RenderDebug(WorldObject* entity){
 // This will be same code as collision checking, yet keeping seperate for now as I would have to put it in common or include collisions
 // into this(which might be the go). For now just using the camera for first arg
 bool RenderManager::CheckOverlap(Renderer* renderer){
-    return (mainCamera->transform->position.x + mainCamera->GetDimensions().x >= entity->transform->position.x && entity->transform->position.x + entity) && ();
+    // Only grabbing camera bounds here as it might change, later on camera change just change gen obj or smth
+    Vector4 cameraBounds = mainCamera->GetBounds();
+    Vector4 rendererBounds = renderer->GetBounds();
+    return (cameraBounds.x + cameraBounds.z >= rendererBounds.x && rendererBounds.x + rendererBounds.z >= cameraBounds.x) && (cameraBounds.y + cameraBounds.w >= rendererBounds.y && rendererBounds.y + rendererBounds.w >= cameraBounds.y);
 }
 
 void RenderManager::SetMainCamera(Camera* camera){
     mainCamera = camera;
 }
 
+// TODO: make sure it has renderer
 void RenderManager::RendererAdd(WorldObject* obj){
     mEntitiesToRender.push_back(obj);
 }

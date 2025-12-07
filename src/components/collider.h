@@ -3,10 +3,22 @@
 #include <SDL3/SDL.h>
 #include "../util/common.h"
 
+class Transform;
+
 class Collider : public Component {
 public:
-    Collider(float width = tilesize, float height = tilesize);
+    Collider(float width = tilesize, float height = tilesize, float offsetX = 0, float offsetY = 0);
 
-    // Maybe make my own as i only need width and height, transform would drive the position
-    SDL_FRect bounds;
+    void Init() override;
+
+    Vector4 GetBounds();
+    Vector2 GetPosition();
+    Vector2 GetOffset();
+    Vector2 GetSize();
+
+private:
+    Transform* mTransform{ nullptr };
+
+    Vector2 mOffset;
+    Vector2 mSize;
 };

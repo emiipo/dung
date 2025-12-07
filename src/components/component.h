@@ -8,6 +8,8 @@ public:
 
     virtual ~Component();
 
+    virtual void Init(){};
+
     GameObject* const& gameObject = mCreator;
 private:
     GameObject* mCreator{ nullptr };

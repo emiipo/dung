@@ -12,7 +12,9 @@ public:
 
     void Update();
 
-    Vector2 GetDimensions();
+    Vector4 GetBounds();
+    Vector2 GetPosition();
+    Vector2 GetSize();
 private:
     int mWidth;
     int mHeight;
