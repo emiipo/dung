@@ -15,4 +15,5 @@ Here's a little reminder for myself of things I plan to do :)
 - [ ] Organise the code base better (probably seperate into game & engine folders)
 - [ ] Fix code style (I am really undecisive and usually vibe it out)
 - [ ] Proper input handling with easily rebindable keys
+- [ ] Sort out proper headers and forward declarations
 - [ ] Increase this list :)
