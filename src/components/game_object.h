@@ -23,7 +23,10 @@ public:
     T* GetComponent(){
         const std::type_info& type = typeid(T);
         for(const std::unique_ptr<Component>& comp : mComponents){
-            if(typeid(*comp.get()) == type) return static_cast<T*>(comp.get());
+            if(comp){
+                // TODO: fix the side effect of typeid
+                if(typeid(*comp) == type) return static_cast<T*>(comp.get());
+            }
         }
         return nullptr;
     }
