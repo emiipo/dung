@@ -49,7 +49,7 @@ void Application::Run(){
     WorldObject player;
     player.renderer->SetRenderCharacter('@');
     player.renderer->SetRenderColor({255, 182, 193, 255});
-    renderManager->RendererAdd(&player);
+    renderManager->AddRenderer(player.renderer);
     cam.SetFollowTarget(&player);
     t = player.transform;
 
@@ -64,7 +64,7 @@ void Application::Run(){
                 tile->transform->SetPosition((float)(x * tilesize), (float)(y * tilesize));
                 //tile->renderer->SetRenderColor({255, 255, 255, a});
                 //tile->renderer->SetRenderCharacter((int)map[y][x]);
-                renderManager->RendererAdd(tile);
+                renderManager->AddRenderer(tile->renderer);
                 //SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
                 //SDL_FRect rect{(float)x,(float)y,1,1};
                 //SDL_RenderRect(mainRenderer, &rect);

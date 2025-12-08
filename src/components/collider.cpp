@@ -14,20 +14,20 @@ void Collider::Init(){
     mTransform = gameObject->GetComponent<Transform>();
 }
 
-Vector4 Collider::GetBounds(){
+Vector4 Collider::GetBounds() const{
     if(!mTransform) return {0,0,0,0};
     return {mTransform->position.x + mOffset.x, mTransform->position.y + mOffset.y, mSize.x, mSize.y};
 }
 
-Vector2 Collider::GetPosition(){
+Vector2 Collider::GetPosition() const{
     if(!mTransform) return {0,0};
     return {mTransform->position.x + mOffset.x, mTransform->position.y + mOffset.y};
 }
 
-Vector2 Collider::GetOffset(){
+Vector2 Collider::GetOffset() const{
     return {mOffset.x, mOffset.y};
 }
 
-Vector2 Collider::GetSize(){
+Vector2 Collider::GetSize() const{
     return {mSize.x, mSize.y};
 }   

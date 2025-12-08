@@ -20,14 +20,14 @@ void Camera::Update(){
     }
 }
 
-Vector4 Camera::GetBounds(){
+Vector4 Camera::GetBounds() const{
     return {transform->position.x, transform->position.y, (float)mWidth, (float)mHeight};
 }
 
-Vector2 Camera::GetPosition(){
+Vector2 Camera::GetPosition() const{
     return {transform->position.x, transform->position.y};
 }
 
-Vector2 Camera::GetSize(){
+Vector2 Camera::GetSize() const{
     return {(float)mWidth, (float)mHeight};
 }

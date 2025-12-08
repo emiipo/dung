@@ -18,7 +18,7 @@ void Renderer::SetRenderCharacter(char c){
     mRenderChar = c;
 }
 
-const char Renderer::GetRenderCharacter(){
+char Renderer::GetRenderCharacter() const{
     return mRenderChar;
 }
 
@@ -26,20 +26,20 @@ void Renderer::SetRenderColor(SDL_Color color){
     mRenderColor = color;
 }
 
-const SDL_Color Renderer::GetRenderColor(){
+const SDL_Color Renderer::GetRenderColor() const{
     return mRenderColor;
 }
 
-Vector4 Renderer::GetBounds(){
+Vector4 Renderer::GetBounds() const{
     if(!mTransform) return {0,0,0,0};
     return {mTransform->position.x, mTransform->position.y, mSize.x, mSize.y};
 }
 
-Vector2 Renderer::GetPosition(){
+Vector2 Renderer::GetPosition() const{
     if(!mTransform) return {0,0};
     return {mTransform->position.x, mTransform->position.y};
 }
 
-Vector2 Renderer::GetSize(){
+Vector2 Renderer::GetSize() const{
     return {mSize.x, mSize.y};
 }

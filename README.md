@@ -14,7 +14,8 @@ Here's a little reminder for myself of things I plan to do :)
 - [ ] Properly implement Events using delegates and such
 - [ ] Organise the code base better (probably seperate into game & engine folders)
 - [ ] Fix code style (I am really undecisive and usually vibe it out)
-- [ ] Proper input handling with easily rebindable keys
+- [x] Proper input handling with easily rebindable keys
 - [ ] Sort out proper headers and forward declarations
 - [ ] I like using std::list, but memory and iteration wise it's less performant, eventually move some of them over to std::vector
+- [ ] In rendering, make a struct which stores all the data for the renderer, only update if the data has changed
 - [ ] Increase this list :)

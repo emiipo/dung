@@ -1,6 +1,5 @@
 #pragma once
-#include <list>
-#include <iostream>
+#include <vector>
 #include <typeinfo>
 #include <memory>
 #include "component.h"
@@ -32,5 +31,5 @@ public:
     }
 
 private:
-    std::list<std::unique_ptr<Component>> mComponents;
+    std::vector<std::unique_ptr<Component>> mComponents;
 };

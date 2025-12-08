@@ -12,9 +12,9 @@ public:
 
     void Update();
 
-    Vector4 GetBounds();
-    Vector2 GetPosition();
-    Vector2 GetSize();
+    Vector4 GetBounds() const;
+    Vector2 GetPosition() const;
+    Vector2 GetSize() const;
 private:
     int mWidth;
     int mHeight;

@@ -11,10 +11,10 @@ public:
 
     void Init() override;
 
-    Vector4 GetBounds();
-    Vector2 GetPosition();
-    Vector2 GetOffset();
-    Vector2 GetSize();
+    Vector4 GetBounds() const;
+    Vector2 GetPosition() const;
+    Vector2 GetOffset() const;
+    Vector2 GetSize() const;
 
 private:
     Transform* mTransform{ nullptr };

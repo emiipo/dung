@@ -1,12 +1,13 @@
 #pragma once
-#include <SDL3/SDL.h>
-#include <list>
-#include "../components/world_object.h"
-#include "../components/transform.h"
+#include <vector>
 #include "../util/common.h"
-#include "camera.h"
 
 class Renderer;
+class Collider;
+class Camera;
+struct SDL_Window;
+struct SDL_Renderer;
+struct SDL_FRect;
 
 class RenderManager {
 public:
@@ -15,21 +16,25 @@ public:
 
     void Render();
 
-    void RendererAdd(WorldObject* obj);
-    void RendererRemove(WorldObject* obj);
+    void AddRenderer(Renderer* renderer);
+    void RemoveRenderer(Renderer* renderer);
 
     void SetMainCamera(Camera* camera);
 
 private:
-    void RenderEntity(WorldObject* entity);
-    void RenderDebug(WorldObject* entity);
+    void RenderEntity(Renderer* renderer);
+    void RenderDebug(Collider* collider);
 
     bool CheckOverlap(Renderer* renderer);
 
     SDL_Renderer* mainRenderer{ nullptr };
     Camera* mainCamera{ nullptr };
+    Vector4 cameraBounds{ 0,0,0,0 };
 
     bool renderDebug{ false };
+    SDL_FRect debugRect;
 
-    std::list<WorldObject*> mEntitiesToRender;
+    std::vector<Renderer*> mRenderers;
+    // Since we replace it keep it here for now, would need to remove if we decide to multi thread
+    Vector4 rendererBounds{ 0,0,0,0 };
 };

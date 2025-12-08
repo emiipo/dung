@@ -4,6 +4,7 @@
 #include "../util/common.h"
 
 class Transform;
+class Component;
 
 // For now this will be default renderer, eventually extend into ascii/texture etc
 class Renderer : public Component {
@@ -13,14 +14,14 @@ public:
     void Init() override;
 
     void SetRenderCharacter(char c);
-    const char GetRenderCharacter();
+    char GetRenderCharacter() const;
 
     void SetRenderColor(SDL_Color color);
-    const SDL_Color GetRenderColor();
+    const SDL_Color GetRenderColor() const;
 
-    Vector4 GetBounds();
-    Vector2 GetPosition();
-    Vector2 GetSize();
+    Vector4 GetBounds() const;
+    Vector2 GetPosition() const;
+    Vector2 GetSize() const;
 
 private:
     Transform* mTransform{ nullptr };
