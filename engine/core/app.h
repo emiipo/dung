@@ -12,16 +12,13 @@ public:
     Application();
     ~Application();
 
+    virtual void Start() {};
+    virtual void Update() {};
+
     void Run();
     void Quit();
 
-    //These should be moved into components etc, here for testing only
-    void MoveUp();
-    void MoveDown();
-    void MoveLeft();
-    void MoveRight();
-
-private:
+protected:
     bool quit{ false };
 
     int kScreenWidth{ 640 };
@@ -31,7 +28,4 @@ private:
     RenderManager* renderManager{ nullptr };
     InputManager* inputManager{ nullptr };
     SDLEventManager* sdlEventManager{ nullptr };
-
-    //Delete later, testing
-    Transform* t{nullptr};
 };
