@@ -1,5 +1,7 @@
 #include "camera.h"
 #include "../util/common.h"
+#include "../components/transform.h"
+
 
 Camera::Camera(float x, float y, int width, int height) : WorldObject(false){
     mWidth = width;

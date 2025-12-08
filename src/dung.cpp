@@ -15,15 +15,15 @@ void Dung::Start(){
     inputManager->AddKeyDownListenerToBinding("Move Right", [this]() {this->MoveRight();});
 
     // Setup camera & player
-    Camera cam(0,0,640,480);
-    renderManager->SetMainCamera(&cam);
+    Camera* cam = new Camera(0,0,640,480);
+    renderManager->SetMainCamera(cam);
 
-    WorldObject player;
-    player.renderer->SetRenderCharacter('@');
-    player.renderer->SetRenderColor({255, 182, 193, 255});
-    renderManager->AddRenderer(player.renderer);
-    cam.SetFollowTarget(&player);
-    t = player.transform;
+    WorldObject* player = new WorldObject();
+    player->renderer->SetRenderCharacter('@');
+    player->renderer->SetRenderColor({255, 182, 193, 255});
+    renderManager->AddRenderer(player->renderer);
+    cam->SetFollowTarget(player);
+    t = player->transform;
 
     // Generate level
     LevelGenerator gen;
