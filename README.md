@@ -16,4 +16,5 @@ Here's a little reminder for myself of things I plan to do :)
 - [ ] Fix code style (I am really undecisive and usually vibe it out)
 - [ ] Proper input handling with easily rebindable keys
 - [ ] Sort out proper headers and forward declarations
+- [ ] I like using std::list, but memory and iteration wise it's less performant, eventually move some of them over to std::vector
 - [ ] Increase this list :)

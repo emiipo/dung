@@ -19,10 +19,15 @@ Application::Application() {
     sdlEventManager = new SDLEventManager();
     sdlEventManager->SetInputManager(inputManager);
     sdlEventManager->onQuitEvent.AddListener([this]() {this->Quit();});
-    inputManager->AddKeyDownListener(SDLK_UP, [this]() {this->MoveUp();});
-    inputManager->AddKeyDownListener(SDLK_DOWN, [this]() {this->MoveDown();});
-    inputManager->AddKeyDownListener(SDLK_LEFT, [this]() {this->MoveLeft();});
-    inputManager->AddKeyDownListener(SDLK_RIGHT, [this]() {this->MoveRight();});
+
+    inputManager->CreateBinding("Move Up", {SDLK_UP, SDLK_W});
+    inputManager->CreateBinding("Move Down", {SDLK_DOWN, SDLK_S});
+    inputManager->CreateBinding("Move Left", {SDLK_LEFT, SDLK_A});
+    inputManager->CreateBinding("Move Right", {SDLK_RIGHT, SDLK_D});
+    inputManager->AddKeyDownListenerToBinding("Move Up", [this]() {this->MoveUp();});
+    inputManager->AddKeyDownListenerToBinding("Move Down", [this]() {this->MoveDown();});
+    inputManager->AddKeyDownListenerToBinding("Move Left", [this]() {this->MoveLeft();});
+    inputManager->AddKeyDownListenerToBinding("Move Right", [this]() {this->MoveRight();});
     
 
     renderManager = new RenderManager(mainWindow, true);
