@@ -1,7 +1,7 @@
 #include <SDL3/SDL.h>
 #include <iostream>
 #include <exception>
-#include "core/app.h"
+#include "../engine/core/app.h"
 
 int main(int argc, char* argv[]) {
     try {
