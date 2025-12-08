@@ -1,5 +1,4 @@
 add_library(engine OBJECT
-    main.cpp 
     core/app.cpp 
     core/app.h 
     core/SDL_event_manager.cpp 
