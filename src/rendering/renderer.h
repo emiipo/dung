@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "component.h"
+#include "../components/component.h"
 #include "../util/common.h"
 
 class Transform;

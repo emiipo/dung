@@ -2,7 +2,7 @@
 #include <SDL3/SDL_render.h>
 #include "render_manager.h"
 #include "camera.h"
-#include "../components/renderer.h"
+#include "renderer.h"
 #include "../components/collider.h"
 
 RenderManager::RenderManager(SDL_Window* mainWindow, bool renderDebug){

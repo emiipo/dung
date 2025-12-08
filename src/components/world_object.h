@@ -1,8 +1,9 @@
 #pragma once
 #include "game_object.h"
-#include "transform.h"
-#include "renderer.h"
-#include "collider.h"
+
+class Transform;
+class Collider;
+class Renderer;
 
 class WorldObject : public GameObject {
 public:

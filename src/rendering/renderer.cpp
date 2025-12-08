@@ -1,6 +1,6 @@
 #include "renderer.h"
-#include "game_object.h"
-#include "transform.h"
+#include "../components/game_object.h"
+#include "../components/transform.h"
 
 Renderer::Renderer(char defaultChar, SDL_Color defaultColor){
     mRenderChar = defaultChar;
