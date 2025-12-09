@@ -19,6 +19,7 @@ void Dung::Start(){
     renderManager->SetMainCamera(cam);
 
     WorldObject* player = new WorldObject();
+    player->AddComponent<Rigidbody>();
     player->renderer->SetRenderCharacter('@');
     player->renderer->SetRenderColor({255, 182, 193, 255});
     cam->SetFollowTarget(player);

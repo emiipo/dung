@@ -1,6 +1,8 @@
 #pragma once
 #include "../engine/core/app.h"
 
+class Rigidbody;
+
 class Dung : public Application{
 public:
     void Start() override;

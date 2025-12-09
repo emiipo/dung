@@ -6,6 +6,7 @@
 #include "transform.h"
 #include "../physics/collider.h"
 #include "../rendering/renderer.h"
+#include "../physics/rigidbody.h"
 
 class GameObject {
 public:
