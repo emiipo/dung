@@ -4,7 +4,11 @@
 #include "../util/common.h"
 #include <iostream>
 
+Application* Application::Instance = nullptr;
+
 Application::Application() {
+    Instance = this;
+
     SDL_Init(SDL_INIT_VIDEO);
 
     mainWindow = SDL_CreateWindow("dung", kScreenWidth, kScreenHeight, 0);
@@ -27,6 +31,7 @@ Application::~Application() {
     SDL_DestroyWindow(mainWindow);
     mainWindow = nullptr;
     SDL_Quit();
+    Instance = nullptr;
 }
 
 void Application::Run(){
@@ -43,4 +48,16 @@ void Application::Run(){
 
 void Application::Quit(){
     quit = true;
+}
+
+RenderManager& Application::GetRenderManager() {
+    return *renderManager;
+}
+
+PhysicsManager& Application::GetPhysicsManager() {
+    return *physicsManager;
+}
+
+InputManager& Application::GetInputManager() {
+    return *inputManager;
 }

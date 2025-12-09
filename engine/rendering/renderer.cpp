@@ -1,6 +1,7 @@
 #include "renderer.h"
 #include "../components/game_object.h"
 #include "../components/transform.h"
+#include "../core/app.h"
 
 Renderer::Renderer(char defaultChar, SDL_Color defaultColor){
     mRenderChar = defaultChar;
@@ -12,6 +13,8 @@ Renderer::Renderer(char defaultChar, SDL_Color defaultColor){
 //Disable if transform doesnt exist
 void Renderer::Init() {
     mTransform = gameObject->GetComponent<Transform>();
+
+    Application::Instance->GetRenderManager().RegisterRenderer(this);
 }
 
 void Renderer::SetRenderCharacter(char c){

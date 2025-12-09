@@ -78,7 +78,7 @@ void RenderManager::SetMainCamera(Camera* camera){
 }
 
 // TODO: make sure it has renderer
-void RenderManager::AddRenderer(Renderer* renderer){
+void RenderManager::RegisterRenderer(Renderer* renderer){
     mRenderers.push_back(renderer);
 }
 

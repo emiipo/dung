@@ -19,6 +19,13 @@ public:
     void Run();
     void Quit();
 
+    // Maybe add a getter but for now this works
+    static Application* Instance;
+
+    RenderManager& GetRenderManager();
+    PhysicsManager& GetPhysicsManager();
+    InputManager& GetInputManager();
+
 protected:
     bool quit{ false };
 

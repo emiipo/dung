@@ -16,7 +16,7 @@ public:
 
     void Render();
 
-    void AddRenderer(Renderer* renderer);
+    void RegisterRenderer(Renderer* renderer);
     void RemoveRenderer(Renderer* renderer);
 
     void SetMainCamera(Camera* camera);
