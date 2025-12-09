@@ -20,8 +20,8 @@ add_library(engine OBJECT
     components/transform.cpp 
     components/transform.h 
     util/common.h 
-    components/collider.cpp 
-    components/collider.h 
+    physics/collider.cpp 
+    physics/collider.h 
     input/input_manager.cpp 
     input/input_manager.h)
 

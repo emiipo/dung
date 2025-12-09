@@ -1,6 +1,6 @@
 #include "collider.h"
-#include "game_object.h"
-#include "transform.h"
+#include "../components/game_object.h"
+#include "../components/transform.h"
 
 Collider::Collider(float width, float height, float offsetX, float offsetY){
     mSize.x = width;

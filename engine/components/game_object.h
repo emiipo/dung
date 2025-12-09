@@ -4,7 +4,7 @@
 #include <memory>
 #include "component.h"
 #include "transform.h"
-#include "collider.h"
+#include "../physics/collider.h"
 #include "../rendering/renderer.h"
 
 class GameObject {

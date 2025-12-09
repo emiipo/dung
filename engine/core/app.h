@@ -28,4 +28,7 @@ protected:
     RenderManager* renderManager{ nullptr };
     InputManager* inputManager{ nullptr };
     SDLEventManager* sdlEventManager{ nullptr };
+
+    // Adding for later use
+    std::vector<std::unique_ptr<GameObject>> mGameObjects;
 };
