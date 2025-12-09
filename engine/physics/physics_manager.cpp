@@ -1,9 +1,14 @@
 #include "physics_manager.h"
 
 void PhysicsManager::HandlePhysics() {
-    // Go through rigidbodies
-    // Check their old and new position
-    // Check collision with colliders. Im pretty sure i only need to check distance and only closest colliders i think
+    for (Rigidbody* rigidbody : mRigidbodies){
+        if(rigidbody->GetOldPosition() != rigidbody->GetNewPosition()){
+            // For now checking them all BUT eventually implement spatial partitioning
+            for(Collider* collider : mColliders){
+                
+            }
+        }
+    }
 }
 
 void PhysicsManager::RegisterRigidbody(Rigidbody* rigidbody) {

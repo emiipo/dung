@@ -14,4 +14,6 @@ private:
     //Maybe make it into sets since they should be unique?
     std::vector<Rigidbody*> mRigidbodies;
     std::vector<Collider*> mColliders;
+
+    bool CheckAABB(Renderer* renderer);
 };
