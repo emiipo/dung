@@ -15,7 +15,7 @@ void Dung::Start(){
     inputManager->AddKeyDownListenerToBinding("Move Right", [this]() {this->MoveRight();});
 
     // Setup camera & player
-    Camera* cam = new Camera(0,0,640,480);
+    Camera* cam = new Camera(0,0,kScreenWidth,kScreenHeight);
     renderManager->SetMainCamera(cam);
 
     WorldObject* player = new WorldObject();

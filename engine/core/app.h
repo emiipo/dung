@@ -21,8 +21,8 @@ public:
 protected:
     bool quit{ false };
 
-    int kScreenWidth{ 640 };
-    int kScreenHeight{ 480 };
+    int kScreenWidth{ 1280 };
+    int kScreenHeight{ 720 };
 
     SDL_Window* mainWindow{ nullptr };
     RenderManager* renderManager{ nullptr };
