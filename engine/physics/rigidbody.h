@@ -1,6 +1,13 @@
 #pragma once
 #include "../components/component.h"
 
-class Rigidbody : public Component {
+class Transform;
 
+class Rigidbody : public Component {
+public:
+    Rigidbody();
+
+    void Init() override;
+private:
+    Transform* mTransform{ nullptr };
 };

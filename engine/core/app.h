@@ -1,12 +1,12 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include <vector>
+#include <memory>
 #include "../rendering/render_manager.h"
 #include "../physics/physics_manager.h"
 #include "../input/input_manager.h"
 #include "SDL_event_manager.h"
 #include "../components/transform.h"
-
 
 class Application {
 public:
@@ -25,12 +25,12 @@ protected:
     int kScreenWidth{ 1280 };
     int kScreenHeight{ 720 };
 
-    // Make these into unique_ptr?
+    // Later make this into a unique ptr maybe too? for now keeping it like this but i dont think we need raw ptr
     SDL_Window* mainWindow{ nullptr };
-    RenderManager* renderManager{ nullptr };
-    PhysicsManager* physicsManager{ nullptr };
-    InputManager* inputManager{ nullptr };
-    SDLEventManager* sdlEventManager{ nullptr };
+    std::unique_ptr<RenderManager> renderManager{ nullptr };
+    std::unique_ptr<PhysicsManager> physicsManager{ nullptr };
+    std::unique_ptr<InputManager> inputManager{ nullptr };
+    std::unique_ptr<SDLEventManager> sdlEventManager{ nullptr };
 
     // Adding for later use
     std::vector<std::unique_ptr<GameObject>> mGameObjects;

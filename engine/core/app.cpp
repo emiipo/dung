@@ -14,13 +14,13 @@ Application::Application() {
         return;
     }
 
-    physicsManager = new PhysicsManager();
-    inputManager = new InputManager();
-    sdlEventManager = new SDLEventManager();
-    sdlEventManager->SetInputManager(inputManager);
-    sdlEventManager->onQuitEvent.AddListener([this]() {this->Quit();});
+    physicsManager = std::make_unique<PhysicsManager>();
+    inputManager = std::make_unique<InputManager>();
+    sdlEventManager = std::make_unique<SDLEventManager>();
+    renderManager = std::make_unique<RenderManager>(mainWindow, true);
 
-    renderManager = new RenderManager(mainWindow, true);
+    sdlEventManager->SetInputManager(inputManager.get());
+    sdlEventManager->onQuitEvent.AddListener([this]() {this->Quit();});
 }
 
 Application::~Application() {
