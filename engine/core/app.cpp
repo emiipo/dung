@@ -14,6 +14,7 @@ Application::Application() {
         return;
     }
 
+    physicsManager = new PhysicsManager();
     inputManager = new InputManager();
     sdlEventManager = new SDLEventManager();
     sdlEventManager->SetInputManager(inputManager);
@@ -34,6 +35,7 @@ void Application::Run(){
     //Main loop
     while (!quit) {
         sdlEventManager->HandleSDLEvents();
+        physicsManager->HandlePhysics(); // This one is super vague but just main entry point, probably would want to put it in its own loop
         Update();
         renderManager->Render();
     }
