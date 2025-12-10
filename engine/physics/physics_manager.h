@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "../util/common.h"
 
 class Rigidbody;
 class Collider;
@@ -15,5 +16,7 @@ private:
     std::vector<Rigidbody*> mRigidbodies;
     std::vector<Collider*> mColliders;
 
-    bool CheckAABB(Collider* collider, Collider* other);
+    // later do an out hit info thingy and velocity * deltatime which we dont have rn
+    bool CheckCollision(Rigidbody* rigidbody);
+    bool CheckAABB(Vector4 colliderBounds, Vector4 otherBounds);
 };

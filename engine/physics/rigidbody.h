@@ -15,17 +15,12 @@ public:
 
     // Later sort out proper physics but for now just simple move. This one works by adding to current pos
     void AddVelocity(Vector2 velocity);
-    Vector2 GetOldPosition() const;
-    Vector2 GetNewPosition() const;
 
     Collider* const& collider = mCollider;
+    Transform* const& transform = mTransform;
 private:
     Transform* mTransform{ nullptr };
     Collider* mCollider{ nullptr };
 
-    Vector2 mOldPosition;
-    Vector2 mNewPosition;
-
-    void ApplyMove();
-    void DenyMove();
+    Vector2 velocity;
 };
