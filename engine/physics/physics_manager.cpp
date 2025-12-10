@@ -39,5 +39,5 @@ bool PhysicsManager::CheckCollision(Rigidbody* rigidbody){
 }
 
 bool PhysicsManager::CheckAABB(Vector4 colliderBounds, Vector4 otherBounds){
-    return (colliderBounds.x + colliderBounds.z >= otherBounds.x && otherBounds.x + otherBounds.z >= colliderBounds.x) && (colliderBounds.y + colliderBounds.w >= otherBounds.y && otherBounds.y + otherBounds.w >= colliderBounds.y);
+    return (colliderBounds.x + colliderBounds.z > otherBounds.x && otherBounds.x + otherBounds.z > colliderBounds.x) && (colliderBounds.y + colliderBounds.w > otherBounds.y && otherBounds.y + otherBounds.w > colliderBounds.y);
 }
