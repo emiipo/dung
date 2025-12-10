@@ -4,17 +4,24 @@
 #include "rigidbody.h"
 
 void PhysicsManager::HandlePhysics() {
+    // REfine this later just want it to work now
+    bool hasCollided = false;
     for (Rigidbody* rigidbody : mRigidbodies){
         if(rigidbody->GetOldPosition() != rigidbody->GetNewPosition()){
+            hasCollided = false;
             // For now checking them all BUT eventually implement spatial partitioning
             for(Collider* collider : mColliders){
                 if(collider == rigidbody->collider) continue;
                 if(CheckAABB(rigidbody->collider, collider)){
-                    rigidbody->DenyMove();
+                    hasCollided = true;
+                    break;
                 }
-                else{
-                    rigidbody->ApplyMove();
-                }
+            }
+            if(hasCollided){
+                rigidbody->DenyMove();
+            }
+            else{
+                rigidbody->ApplyMove();
             }
         }
     }
