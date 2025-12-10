@@ -23,7 +23,7 @@ void Dung::Start(){
     player->renderer->SetRenderCharacter('@');
     player->renderer->SetRenderColor({255, 182, 193, 255});
     cam->SetFollowTarget(player);
-    t = player->transform;
+    rb = player->GetComponent<Rigidbody>();
 
     // Generate level
     LevelGenerator gen;
@@ -34,7 +34,7 @@ void Dung::Start(){
             if(map[y][x] > 1){
                 WorldObject* tile = new WorldObject();
                 //Uint8 a = (Uint8)((map[x][y] * 0.5f) * 255);
-                tile->transform->SetPosition((float)(x * tilesize), (float)(y * tilesize));
+                tile->transform->SetPosition({(float)(x * tilesize), (float)(y * tilesize)});
                 //tile->renderer->SetRenderColor({255, 255, 255, a});
                 //tile->renderer->SetRenderCharacter((int)map[y][x]);
                 //SDL_SetRenderDrawColor(mainRenderer, 255, 255, 255, a);
@@ -51,17 +51,17 @@ void Dung::Update(){
 }
 
 void Dung::MoveUp(){
-    if(t) t->SetPosition(t->position.x, t->position.y - tilesize);
+    if(rb) rb->AddVelocity({0, -tilesize});
 }
 
 void Dung::MoveDown(){
-    if(t) t->SetPosition(t->position.x, t->position.y + tilesize);
+    if(rb) rb->AddVelocity({0, tilesize});
 }
 
 void Dung::MoveLeft(){
-    if(t) t->SetPosition(t->position.x - tilesize, t->position.y);
+    if(rb) rb->AddVelocity({-tilesize, 0});
 }
 
 void Dung::MoveRight(){
-    if(t) t->SetPosition(t->position.x + tilesize, t->position.y);
+    if(rb) rb->AddVelocity({tilesize, 0});
 }

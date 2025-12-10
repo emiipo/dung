@@ -18,7 +18,7 @@ void Camera::ClearFollowTarget(){
 
 void Camera::Update(){
     if(followTarget){
-        transform->SetPosition(followTarget->transform->position.x - (mWidth/2) + (tilesize/2), followTarget->transform->position.y - (mHeight/2) + (tilesize/2));
+        transform->SetPosition({followTarget->transform->position.x - (mWidth/2) + (tilesize/2), followTarget->transform->position.y - (mHeight/2) + (tilesize/2)});
     }
 }
 

@@ -1,6 +1,7 @@
 #include "collider.h"
 #include "../components/game_object.h"
 #include "../components/transform.h"
+#include "../core/app.h"
 
 Collider::Collider(float width, float height, float offsetX, float offsetY){
     mSize.x = width;
@@ -12,6 +13,8 @@ Collider::Collider(float width, float height, float offsetX, float offsetY){
 //Disable if transform doesnt exist
 void Collider::Init(){
     mTransform = gameObject->GetComponent<Transform>();
+
+    Application::Instance->GetPhysicsManager().RegisterCollider(this);
 }
 
 Vector4 Collider::GetBounds() const{

@@ -16,5 +16,5 @@ public:
 
 private:
     //Delete later, testing
-    Transform* t{nullptr};
+    Rigidbody* rb{nullptr};
 };

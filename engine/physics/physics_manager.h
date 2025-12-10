@@ -15,5 +15,5 @@ private:
     std::vector<Rigidbody*> mRigidbodies;
     std::vector<Collider*> mColliders;
 
-    bool CheckAABB(Renderer* renderer);
+    bool CheckAABB(Collider* collider, Collider* other);
 };

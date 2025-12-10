@@ -69,6 +69,7 @@ void RenderManager::RenderDebug(Collider* collider){
 
 // This will be same code as collision checking, yet keeping seperate for now as I would have to put it in common or include collisions
 // into this(which might be the go). For now just using the camera for first arg
+// Also we pass a thing but its not being used fix this
 bool RenderManager::CheckOverlap(Renderer* renderer){
     return (cameraBounds.x + cameraBounds.z >= rendererBounds.x && rendererBounds.x + rendererBounds.z >= cameraBounds.x) && (cameraBounds.y + cameraBounds.w >= rendererBounds.y && rendererBounds.y + rendererBounds.w >= cameraBounds.y);
 }

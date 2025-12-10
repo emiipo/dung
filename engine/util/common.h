@@ -13,6 +13,14 @@ struct Vector2{
     Vector2 operator-(Vector2 other) const{
         return {x-other.x, y-other.y};
     }
+
+    bool operator==(Vector2 other) const{
+        return (x == other.x && y == other.y);
+    }
+
+    bool operator!=(Vector2 other) const{
+        return !(x == other.x && y == other.y);
+    }
 };
 
 struct Vector3{
@@ -25,6 +33,14 @@ struct Vector3{
     Vector3 operator-(Vector3 other) const{
         return {x-other.x, y-other.y, z-other.z};
     }
+
+    bool operator==(Vector3 other) const{
+        return (x == other.x && y == other.y && z == other.z);
+    }
+
+    bool operator!=(Vector3 other) const{
+        return !(x == other.x && y == other.y && z == other.z);
+    }
 };
 
 struct Vector4{
@@ -36,5 +52,13 @@ struct Vector4{
 
     Vector4 operator-(Vector4 other) const{
         return {x-other.x, y-other.y, z-other.z, w-other.w};
+    }
+
+    bool operator==(Vector4 other) const{
+        return (x == other.x && y == other.y && z == other.z && w == other.w);
+    }
+
+    bool operator!=(Vector4 other) const{
+        return !(x == other.x && y == other.y && z == other.z && w == other.w);
     }
 };
